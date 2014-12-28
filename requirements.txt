@@ -1,0 +1,4 @@
+PuLP==1.5.6
+argparse==1.2.1
+pyparsing==1.5.7
+wsgiref==0.1.2
