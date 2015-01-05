@@ -57,7 +57,7 @@ exp_returns =  concat({'mean': returns.mean(), 'variance': returns.var()}, axis 
 class CurrencyPortfolio(YhatModel):
     @preprocess(in_type=dict, out_type=dict)
     def execute(self, data):
-        P = matrix(data['alpha'] * returns_cov.as_matrix())
+        P = matrix(data['risk_aversion'] * returns_cov.as_matrix())
         q = matrix(-exp_returns['mean'].as_matrix())
         G = matrix(0.0, (len(q),len(q)))
         G[::len(q)+1] = -1.0
@@ -76,7 +76,7 @@ class CurrencyPortfolio(YhatModel):
                 investments[countries[i]] = amount*100
 
         return {
-            'alpha': data['alpha'],
+            'risk_aversion': data['risk_aversion'],
             'investments': investments,
             'expected_return': expected_return,
             'variance': variance
